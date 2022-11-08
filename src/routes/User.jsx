@@ -1,5 +1,5 @@
 import { useEffect, useState, Suspense, useCallback } from "react";
-import { useParams, useLoaderData, useNavigate, Await } from "react-router-dom";
+import { useParams, useLoaderData, useNavigate, Await, Link } from "react-router-dom";
 
 export const loader = ({
     params: {id}
@@ -7,64 +7,66 @@ export const loader = ({
     const userPromise = fetch(
         `https://jsonplaceholder.typicode.com/users/${id}`
     ).then((r) => r.json())
-    return { userPromise }
+    const userAlbumsPromise = fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}/albums`
+    ).then((r) => r.json())
+    return { userPromise, userAlbumsPromise }
 }
 
 export default function User() {
-    const [albums, setAlbums] = useState([])
-    const { id } = useParams()
-    useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
-        .then((response) => response.json())
-        .then((albums) => setAlbums(albums))
-    }, [id])
-    const { userPromise } = useLoaderData()
-    const navigate = useNavigate()
-    const goToAlbum = useCallback(
-        (id) => {
-        return () => navigate(`/albums/${id}`)
-        },
-        [navigate]
-    )
+    const { userPromise, userAlbumsPromise } = useLoaderData()
 
-    return <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={userPromise}>
-            {
-                (user) => {
-                    return (<div>
-                        <div>
-                            <p>{user.name}</p>
-                            <p>
-                                Username:{" "}
-                                <span>{user.username}</span>
-                            </p>
-                            <p>
-                                Email:{" "}
-                                <span>{user.email}</span>
-                            </p>
-                            <p>
-                                Phone:{" "}
-                                <span>{user.phone}</span>
-                            </p>
-                            <p>
-                                Site:{" "}
-                                <span>{user.username}</span>
-                            </p>
-                        </div>
-                        {albums.map((album) => {
+    return (
+        <div>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve={userPromise}>
+                    {
+                        (user) => {
                             return (
-                            <div
-                                key={album.id}
-                                onClick={goToAlbum(album.id)}
-                                className="text-sky-600 hover:text-red-400 cursor-pointer"
-                            >
-                                {album.title}
-                            </div>
-                            )
-                        })}
-                    </div>  
-                )}
-            } 
-        </Await>
-    </Suspense>
+                            <div>
+                                <div>
+                                    <p>{user.name}</p>
+                                    <p>
+                                        Username:{" "}
+                                        <span>{user.username}</span>
+                                    </p>
+                                    <p>
+                                        Email:{" "}
+                                        <span>{user.email}</span>
+                                    </p>
+                                    <p>
+                                        Phone:{" "}
+                                        <span>{user.phone}</span>
+                                    </p>
+                                    <p>
+                                        Site:{" "}
+                                        <span>{user.website}</span>
+                                    </p>
+                                </div>
+                            </div>  
+                        )}
+                    } 
+                </Await>
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve={userAlbumsPromise}>
+                    {
+                        (albums) => {
+                            return albums.map((album) => {
+                                return (
+                                    <Link
+                                        key={album.id}
+                                        to={`/albums/${album.id}`}
+                                        className="text-sky-600 hover:text-red-400 cursor-pointer"
+                                    >
+                                        <div>{album.title}</div>
+                                    </Link>
+                                )
+                            })
+                        }
+                    }
+                </Await>
+            </Suspense>
+        </div>
+    )
 }

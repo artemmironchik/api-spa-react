@@ -1,5 +1,4 @@
-import { Link } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 export const loader = async () => {
     const users = await fetch(
         'https://jsonplaceholder.typicode.com/users'
@@ -12,6 +11,7 @@ export default function Users() {
 
     return (
         <div>
+            <p>Users</p>
             {users.map(user => 
                 (<Link
                   key={user.id}

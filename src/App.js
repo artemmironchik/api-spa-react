@@ -4,12 +4,12 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import Layout from './routes/Layout';
-import Albums from './routes/Albums';
+import Albums, {loader as albumsLoader} from './routes/Albums';
 import Users, {loader as usersLoader} from './routes/Users';
 import User, {loader as userLoader} from './routes/User';
-import Album from './routes/Album';
-import NewUser from './routes/NewUser'
+import Album, {loader as albumLoader} from './routes/Album';
 import NotFound from './routes/NotFound'
+import Main from './routes/Main'
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,13 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+          path: '/',
+          loader: albumsLoader,
+          element: <Main />,
+      },
+      {
           path: '/albums',
+          loader: albumsLoader,
           element: <Albums />,
       },
       {
@@ -27,15 +33,13 @@ const router = createBrowserRouter([
       },
       {
           path: '/users/:id',
+          loader: userLoader,
           element: <User />,
       },
       {
           path: '/albums/:id',
+          loader: albumLoader,
           element: <Album />,
-      },
-      {
-          path: '/users/new',
-          element: <NewUser />,
       },
       {
           path: '*',

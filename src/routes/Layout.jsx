@@ -5,25 +5,24 @@ const setActive = ({ isActive }) =>
 
 export default function Layout() {
     return (
-        <div>
-            <header className="flex justify-end pt-6 pr-16 text-xl">
-                <div>
-                    <nav className="flex gap-10">
-                        <NavLink to="/" end className={setActive}>
-                            Main
-                        </NavLink>
-                        <NavLink to="/users" end className={setActive}>
-                            Users
-                        </NavLink>
-                        <NavLink to="/albums" end className={setActive}>
-                            Albums
-                        </NavLink>
-                    </nav>
-                </div>
+        <div className="flex m-auto flex-col max-w-6xl px-10">
+            <header className="flex justify-end pt-6 text-xl">
+                <nav className="flex gap-10">
+                    <NavLink to="/" end className={setActive}>
+                        Main
+                    </NavLink>
+                    <NavLink to="/users" end className={setActive}>
+                        Users
+                    </NavLink>
+                    <NavLink to="/albums" end className={setActive}>
+                        Albums
+                    </NavLink>
+                </nav>
             </header>
-            <main>
+            <main className="mt-20">
                 <Outlet></Outlet>
             </main>
+            <div className="h-px border-black"></div>
             <footer>
                 <div>
                     <p> 

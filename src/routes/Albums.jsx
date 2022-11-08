@@ -1,8 +1,7 @@
 import { useLoaderData, Link } from "react-router-dom";
+import { getAlbums } from "../api/albumsApi";
 export const loader = async () => {
-    const albums = await fetch(
-        'https://jsonplaceholder.typicode.com/albums'
-    ).then((r) => r.json());
+    const albums = await getAlbums();
     return {albums};
 };
 
@@ -11,14 +10,17 @@ export default function Albums() {
 
     return (
         <div>
-            <p>Albums</p>
             {albums.map(album => 
-                (<Link
-                  key={album.id}
-                  to={`/albums/${album.id}`}
-                >
-                    <div>{album.title}</div>
-                </Link>
+                (
+                <div>
+                    <img src="album-icon.png" alt="album-icon" />
+                    <Link
+                    key={album.id}
+                    to={`/albums/${album.id}`}
+                    >
+                        <div>{album.title}</div>
+                    </Link>
+                </div>
             ))}
         </div>
     )

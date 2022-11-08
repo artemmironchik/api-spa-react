@@ -5,8 +5,8 @@ const setActive = ({ isActive }) =>
 
 export default function Layout() {
     return (
-        <div className="flex m-auto flex-col max-w-6xl px-10">
-            <header className="flex justify-end pt-6 text-xl">
+        <div className="flex m-auto flex-col max-w-6xl px-10 min-h-screen justify-between py-8">
+            <header className="flex justify-end text-xl">
                 <nav className="flex gap-10">
                     <NavLink to="/" end className={setActive}>
                         Main
@@ -19,15 +19,14 @@ export default function Layout() {
                     </NavLink>
                 </nav>
             </header>
-            <main className="mt-20">
+            <main className="pb-8">
                 <Outlet></Outlet>
             </main>
-            <div className="h-px border-black"></div>
-            <footer>
-                <div>
+            <footer className="border-t border-black">
+                <div className="flex justify-between mt-4">
                     <p> 
                         Created by{" "}
-                        <a href="https://github.com/artemmironchik">Artem Mironchik</a>
+                        <a href="https://github.com/artemmironchik" className="text-sky-600 cursor-pointer">Artem Mironchik</a>
                     </p>
                     <p>2022</p>
                 </div>

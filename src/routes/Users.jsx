@@ -9,12 +9,13 @@ export default function Users() {
     const {users} = useLoaderData()
 
     return (
-        <div>
+        <div className="pt-16 text-xl underline">
             {users.map(user => 
                 (
                 <Link
                 key={user.id}
                 to={`/users/${user.id}`}
+                className="hover:text-blue-700"
                 >
                     <div>{user.name}</div>
                 </Link>

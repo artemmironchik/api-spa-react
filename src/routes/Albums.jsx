@@ -9,16 +9,19 @@ export default function Albums() {
     const {albums} = useLoaderData()
 
     return (
-        <div>
+        <div className='pt-16'>
             {albums.map(album => 
                 (
-                <div>
-                    <img src="album-icon.png" alt="album-icon" />
+                <div className='text-xl flex'>
+                    <div className="flex-shrink-0 mt-2">
+                      <img src="https://cdn-icons-png.flaticon.com/16/739/739249.png" alt="album-icon" />
+                    </div>
                     <Link
                     key={album.id}
                     to={`/albums/${album.id}`}
+                    className="hover:text-blue-700 underline cursor-pointer pl-2"
                     >
-                        <div>{album.title}</div>
+                        <span>{album.title}</span>
                     </Link>
                 </div>
             ))}

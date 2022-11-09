@@ -1,9 +1,5 @@
 import { Suspense } from 'react';
-import {
-  useLoaderData,
-  Await,
-  Link,
-} from 'react-router-dom';
+import { useLoaderData, Await, Link } from 'react-router-dom';
 import { getUser, getUserAlbums } from '../api/usersApi';
 
 export const loader = ({ params: { id } }) => {
@@ -16,14 +12,14 @@ export default function User() {
   const { userPromise, userAlbumsPromise } = useLoaderData();
 
   return (
-    <div className='pt-16'>
+    <div className="pt-16">
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={userPromise}>
           {(user) => {
             return (
               <div>
-                <div className='text-base text-gray-500'>
-                  <p className='text-xl text-black'>{user.name}</p>
+                <div className="text-base text-gray-500">
+                  <p className="text-xl text-black">{user.name}</p>
                   <p>
                     Username: <span>{user.username}</span>
                   </p>
@@ -42,15 +38,18 @@ export default function User() {
           }}
         </Await>
       </Suspense>
-      <p className='pt-8 pb-2 text-xl'>Albums</p>
+      <p className="pt-8 pb-2 text-xl">Albums</p>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={userAlbumsPromise}>
           {(albums) => {
             return albums.map((album) => {
               return (
-                <div className='text-xl flex'>
-                  <div className='flex-shrink-0 mt-2'>
-                    <img src="https://cdn-icons-png.flaticon.com/16/739/739249.png" alt="album-icon" />
+                <div className="text-xl flex">
+                  <div className="flex-shrink-0 mt-2">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/16/739/739249.png"
+                      alt="album-icon"
+                    />
                   </div>
                   <Link
                     key={album.id}

@@ -13,7 +13,7 @@ export default function User() {
   const { albumPromise, albumCardsPromise } = useLoaderData();
 
   return (
-    <div className='pt-16 text-xl w-100'>
+    <div className="pt-16 text-xl w-100">
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={albumPromise}>
           {(album) => {
@@ -25,7 +25,7 @@ export default function User() {
                     <Await resolve={getUser(album.userId)}>
                       {(user) => {
                         return (
-                          <div className='text-base'>
+                          <div className="text-base">
                             Created by:{' '}
                             <Link
                               to={`/users/${user.id}`}

@@ -8,7 +8,6 @@ import Main from './routes/Main'
 export const routes = [
     {
         path: '/',
-        loader: albumsLoader,
         element: <Main />,
     },
     {

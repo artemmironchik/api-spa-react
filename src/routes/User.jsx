@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useLoaderData, Await, Link } from 'react-router-dom';
+import { useLoaderData, Await, Link, Navigate } from 'react-router-dom';
 import { getUser, getUserAlbums } from '../api/usersApi';
 
 export const loader = ({ params: { id } }) => {
@@ -14,7 +14,7 @@ export default function User() {
   return (
     <div className="pt-16">
       <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={userPromise}>
+        <Await resolve={userPromise} errorElement={<Navigate to="/404"/>}>
           {(user) => {
             return (
               <div>
@@ -40,7 +40,7 @@ export default function User() {
       </Suspense>
       <p className="pt-8 pb-2 text-xl">Albums</p>
       <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={userAlbumsPromise}>
+        <Await resolve={userAlbumsPromise} errorElement={<Navigate to="/404"/>}>
           {(albums) => {
             return albums.map((album) => {
               return (

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useLoaderData, Await, Link } from 'react-router-dom';
+import { useLoaderData, Await, Link, Navigate } from 'react-router-dom';
 import { getAlbum, getPhotos } from '../api/albumsApi';
 import { getUser } from '../api/usersApi';
 
@@ -15,7 +15,7 @@ export default function User() {
   return (
     <div className="pt-16 text-xl w-100">
       <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={albumPromise}>
+        <Await resolve={albumPromise} errorElement={<Navigate to="/404"/>}>
           {(album) => {
             return (
               <div>

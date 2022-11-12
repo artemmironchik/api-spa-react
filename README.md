@@ -6,7 +6,7 @@ To check this project visit https://api-spa-react-kichnorim.vercel.app/.
 
 ## Preview
 
-![Desktop Preview, Main Page](./public/preview_gif2.gif "Main Page")
+![Desktop Preview, Main Page](./public/preview_gif.png "Main Page")
 
 ## Technologies
 

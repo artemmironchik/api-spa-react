@@ -1,13 +1,16 @@
-import { useLoaderData } from 'react-router-dom';
-import { getUsers } from '../api/usersApi';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../redux/users/actions';
 import { ListElement } from '../components/ListElement';
-export const loader = async () => {
-  const users = await getUsers();
-  return { users };
-};
 
 export default function Users() {
-  const { users } = useLoaderData();
+  const dispatch = useDispatch();
+  const {user: userData} = useSelector(state => state)
+  const users = userData.users
+
+  useEffect(() => {
+    dispatch(fetchUsers)
+  }, [dispatch])
 
   return (
     <div className="flex flex-col pt-16 text-xl underline">

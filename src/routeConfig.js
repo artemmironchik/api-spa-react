@@ -1,6 +1,6 @@
-import Albums, {loader as albumsLoader} from './routes/Albums';
-import Users, {loader as usersLoader} from './routes/Users';
-import User, {loader as userLoader} from './components/User';
+import Albums from './routes/Albums';
+import Users from './routes/Users';
+import User from './components/User';
 import Album, {loader as albumLoader} from './components/Album';
 import NotFound from './routes/NotFound'
 import Main from './routes/Main'
@@ -12,17 +12,14 @@ export const routes = [
     },
     {
         path: '/albums',
-        loader: albumsLoader,
         element: <Albums />,
     },
     {
         path: '/users',
-        loader: usersLoader,
         element: <Users />,
     },
     {
         path: '/users/:id',
-        loader: userLoader,
         element: <User />,
     },
     {

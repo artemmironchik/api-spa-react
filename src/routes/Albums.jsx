@@ -1,13 +1,16 @@
-import { useLoaderData } from 'react-router-dom';
-import { getAlbums } from '../api/albumsApi';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAlbums } from '../redux/albums/actions';
 import { ListElement } from '../components/ListElement';
-export const loader = async () => {
-  const albums = await getAlbums();
-  return { albums };
-};
 
 export default function Albums() {
-  const { albums } = useLoaderData();
+  const dispatch = useDispatch();
+  const {album: albumsData} = useSelector(state => state)
+  const albums = albumsData.albums
+
+  useEffect(() => {
+    dispatch(fetchAlbums())
+  }, [dispatch])
 
   return (
     <div className="pt-16 underline text-xl">

@@ -1,4 +1,4 @@
-import Albums, {loader as albumsLoader} from './routes/Albums';
+import Albums from './routes/Albums';
 import Users from './routes/Users';
 import User from './components/User';
 import Album, {loader as albumLoader} from './components/Album';
@@ -12,7 +12,6 @@ export const routes = [
     },
     {
         path: '/albums',
-        loader: albumsLoader,
         element: <Albums />,
     },
     {

@@ -1,4 +1,4 @@
-import { getUser, getUserAlbums } from "../../api/usersApi";
+import { getUser, getUserAlbums, getUsers } from "../../api/usersApi";
 
 export const fetchUser = id => async (dispatch) => {
   dispatch({ type: 'USER/FETCH/START'})
@@ -19,5 +19,16 @@ export const fetchUserAlbums = id => async (dispatch) => {
   } catch (e) {
     console.error(e)
     dispatch({ type: 'USER/ALBUMS/FETCH/ERROR', payload: e})
+  }
+}
+
+export const fetchUsers = async (dispatch) => {
+  dispatch({ type: 'USERS/FETCH/START'})
+  try {
+    const users = await getUsers()
+    dispatch( {type: 'USERS/FETCH/SUCCESS', payload: users})
+  } catch (e) {
+    console.error(e)
+    dispatch({ type: 'USERS/FETCH/ERROR', payload: e})
   }
 }
